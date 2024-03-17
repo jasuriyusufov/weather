@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+        margin-top: 250px;
+        padding: 20px;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        justify-content: center;
+      }
+
+    .container{
+        background-color: cornflowerblue;
+        display: flex;
+        justify-content: center;
+        height: 100%;
+        width: 300px;
+        border-radius: 15px;
+        padding: 15px;
+    }
+
+
+    #humidity{
+        font-size: 30px;
+        justify-content: center;
+        margin-top: 0%;
+    }
+
+    #city{
+        font-size: 35px;
+    }
+
+    #temp{
+        display: flex;
+        justify-content: center;
+        font-size: 40px;
+    }
+
+    .btn-ref{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    </style>
+</head>
+<body>
+<div id="weatherData"></div>
+<div class="container">
+    <div class="weather">
+        <h2 id="city">Glasgow GB</h2>
+        <p id="temp">---</p>
+        <p id="humidity">---</p>
+        <a class="btn-ref" href="\weather">
+            <button>Refresh</button>
+        </a>
+    </div>
+</div>
+<script>
+    fetch('http://127.0.0.1:8000/api/').then(response =>response.json()).then(
+ response=>{
+     console.log(response[0]);
+
+     document.getElementById("temp").innerHTML = Math.round(response[0].temperature - 273.15) + " &#8451";
+     document.getElementById("humidity").innerHTML ="Humidity : "+ response[0].humidity + "%";
+ }
+)
+
+.catch(err => {
+ console.log(err)
+});
+</script>
+</body>
+</html>
